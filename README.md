@@ -1,9 +1,9 @@
 # RobotFramework
 
-## 📜 Conteúdo
+##  Conteúdo
 - [Introdução](#introdução)
 
-## 📖 Introdução
+##  Introdução
 
 O **Robot Framework** é uma ferramenta de testes automatizados utilizada para testar **sites, web apps, aplicativos desktop, mobile, bancos de dados** e muitos outros tipos de sistemas. Ele permite a automação de praticamente qualquer tecnologia e é baseado no conceito de **keyword-driven**, que abstrai a camada de programação de baixo nível.
 

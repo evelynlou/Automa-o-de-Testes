@@ -68,9 +68,9 @@ Instale o plugin: Robot Framework Language Server, que melhora a experiência ao
 
 No VS Code, crie uma nova pasta para armazenar os testes.
 
-Dentro da pasta, crie um arquivo com a extensão .robot para armazenar os casos de teste.
+Dentro da pasta, crie um arquivo com a extensão ".robot" para armazenar os casos de teste.
 
-Normalmente, é utilizado um arquivo separado para os recursos (.resource) e outro para os testes (.robot).
+Normalmente, é utilizado um arquivo separado para os recursos e outro para os testes.
 
 2️⃣ Escolhendo o Método de Escrita dos Testes
 

@@ -51,13 +51,18 @@ Na página do Robot Framework, na aba Resources, há uma seção chamada Librari
 
 Ao escolher a biblioteca desejada, clique no nome da biblioteca, que irá redirecionar para a documentação oficial no GitHub, onde estará o comando para instalação.
 
-4️⃣ Instalação do VS Code e Plugins
+4️⃣ Instalação do VS Code e Plugin
 
 📌 Baixe o VS Code pelo link:  [Vscode.downloads](https://code.visualstudio.com/)
 
 Instale a versão do VS Code compatível com seu sistema operacional.
 
 Instale o plugin: Robot Framework Language Server, que melhora a experiência ao escrever e editar arquivos de teste do Robot Framework.
+
+5️⃣ Instalação da Extensão para pegar o locator de componentes:
+
+📌 Baixe a extensão pelo link:  [Extensão.downloads](https://chromewebstore.google.com/detail/selectorshub-xpath-helper/ndgimibanhlabgdgjcpbbndiehljcpfh?hl=pt-BR))
+
 
 **Observação:** Caso seja necessário interagir com navegadores, instale o WebDriver correspondente ao navegador utilizado.
 
@@ -88,7 +93,6 @@ Exemplo:
     Clicar no botão de "Faça sua busca"
     Digitar o nome "Telefone" no campo de pesquisa
     Verificar o resultado da pesquisa se esta listando o termo "Telefone"
-    Verificar se retorna o termo "Categorias"
 ```
 
 Gherkin BDD
@@ -113,18 +117,20 @@ Exemplo:
     Quando clica no botão "Faça sua busca"  
     E digita "Telefone" no campo de pesquisa  
     Então o sistema exibe os resultados contendo "Telefone"  
-    E o sistema exibe a seção "Categorias" 
 
 ```
-Ambos os métodos têm formatos diferentes, mas seguem a mesma lógica de escrita.
+Ambos os métodos têm formatos diferentes, mas seguem a mesma lógica para a execução dos testes.
 
-3️⃣ Estruturando os Arquivos de Teste
+3️⃣ Estruturando o Arquivo de Teste
 
 No arquivo de teste .robot, a estrutura é a seguinte:
 
 ```sh
 *** Settings ***
 Documentation    Este é um exemplo de caso de teste no Robot Framework
+Resource         Teste_Resources.robot  
+Suite Setup      Abrir o Navegador
+Test Teardown    Limpar o Campo de pesquisa
 
 *** Test Cases ***
 Casos de teste 01: Verificação da busca do site exemple.com
@@ -137,14 +143,93 @@ Casos de teste 01: Verificação da busca do site exemple.com
     Verificar o resultado da pesquisa se esta listando o termo "Telefone"
     Verificar se retorna o termo "Categorias"
 ```
+No robot ao iniciar uma sessão, sempre terá que ser utilizado o "***", no inicio e no final do titulo da sessão.
 
-4️⃣ Tags e Documentação
+Na estrutura acima, podemos observar a sessão chamada "Settings", tal sessão é utilizada para a configuração do arquivo de testes, onde será chamado arquivo de recursos do nosso teste e também pode ser utilizada para a implementação do Setup(Ação antes do suíte ou  dos casos de teste) e Teardow(Ação depois do suíte ou dos casos de teste).
 
 No Robot Framework, podemos adicionar informações adicionais aos testes:
 
-Documentation: Para descrever o caso de teste ou a suíte.
+Documentation: Para descrever o caso de teste ou o suíte.
 
 Tags: Para categorizar os testes e permitir execução seletiva.
 
+4️⃣ Variaveis
+
+Antes de ir para estrutura do arquivo de recurso, é importante mencionar sobre as variaveis dentro do robot.
+
+Variaveis no robot:
+
+- Variavel Global: Variavel que funciona para todos os arquivos de testes, presente no diretório
+- Variavel Suíte: Variavel que pode ser utilizada apenas no arquivo de teste que está sendo chamada, não funcionando para demais arquivos.
+- Variavel Local: variavel que funciona somente na keyword, em que está sendo chamada
+- Variavel de Caso de Teste: variavel poderá ser utilizada apenas no "Caso de teste", onde está sendo chamada.
+
+Essas variaeis possuem keywords que podem ser chamadas e que tornaram as variaveis, como global, suíte, local e de casos de testes:
+
+
+
+
+
+
+
+5️⃣ Estruturando o Arquivo de Recurso de Teste
+
+No arquivo de Recurso de teste, a estrutura é a seguinte:
+
+```sh
+*** Settings ***
+Library    SeleniumLibrary
+Library    XML
+Library    String
+
+*** Variables ***
+
+${URL}    https://www.exemple.com
+${VALOR}    //a[@class='about__anchor anchor-filled']
+${VALOR_BUSCA}    (//span[@class='text text--400 weight--small-200 search-input-label show-for-medium'])[1]
+${INPUT}    //input[@name='search']
+${RESULTADOS}    (//div[@class='pt3 pb3 pr4'])[1]
+
+*** Keywords ***
+
+Abrir o Navegador
+    Open Browser    browser=Chrome
+
+Limpar o Campo de pesquisa
+    Element Should Be Visible    locator=${INPUT}
+    Clear Element Text           locator=${INPUT}
+    Sleep    1s
+
+Acessar a homepage do site da intelbras.com
+    Go To    url=${URL}
+    Wait Until Element Is Visible    locator=${VALOR}
+ 
+Clicar no botão de "Aceitar" cookies
+    Wait Until Element Is Visible     locator=//div[@id='privacytools-banner-consent']
+    Click Element                locator=//a[@id='dm876A']
+
+Clicar no botão de "Faça sua busca"
+    Sleep    1s
+    Element Should Be Visible        locator=${VALOR_BUSCA}
+    Click Element                    locator=${VALOR_BUSCA}
+
+Digitar o nome "Telefone" no campo de pesquisa
+    Input Text    locator=${INPUT}    text=Telefone
+
+Verificar o resultado da pesquisa se esta listando o termo "Telefone"
+    Wait Until Page Contains Element    locator=(//div[contains(text(),'Telefone')])[1]
+    Capture Element Screenshot    locator=${RESULTADOS}
+
+```
+
+No arquivo de recursos também teremos a sessão "Settings", nela colocaremos a library que será utilziada na automação.
+
+No exemplo acima podemos observar que os **Passos** e **Verificações** de testes que foram implementadas no arquvivo de testes, estão sendo chamados na sessão Keywords, Cada passo e verificação vem colado na lateral, para identificação que se trata do titulo da nossas keywords. E as keywords vem abaixo com espaços duplos da lateral e espaços du0plos dos seus argumentos.
+
+##   Comandos no Terminal
+
+## Keywords
+
+Link para aa documentação das keywords
 
 

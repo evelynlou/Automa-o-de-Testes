@@ -4,13 +4,25 @@ Conteúdo
 
 - [Introdução](#introdução)
 - [Instalação do Robot Framework](#instalação-do-robot-framework)
+- [Keywords](#keywords)
 - [Escrevendo Casos de Teste](#escrevendo-casos-de-teste)
+- [Comandos no Terminal](#comandos-no-terminal)
 
 ## Introdução
 
 O Robot Framework é uma ferramenta de testes automatizados utilizada para testar sites, web apps, aplicativos desktop, mobile, bancos de dados e muitos outros tipos de sistemas. Ele permite a automação de praticamente qualquer tecnologia e é baseado no conceito de keyword-driven, que abstrai a camada de programação de baixo nível.
 
 Possui uma sintaxe baseada em dados tabulares, sendo fácil de usar. Além disso, permite que os usuários criem e utilizem bibliotecas em Python, caso necessário. No entanto, o próprio Robot Framework já oferece diversas keywords prontas para facilitar a automação.
+
+## Keywords
+
+As keywords, são palavras chaves que realizam ações no teste e os conjuntos de keywords formam uma library.
+
+As keywords vem juntamente com argumentos que são informações, que permitem que seja realizado uma ação.
+
+A keyword que será implementada vai variar de acordo com a library que está sendo utilizada. cada library possui suas proprias keywords. Mas há aquelas que funcionam para todas, idenpendete da library, se encontra no seguinte link: https://robotframework.org/robotframework/latest/libraries/BuiltIn.html
+
+Um ponto importante a ser resaltado, é que durante a analise da documentação das keywords seus argumentos vierem com o sinal de "=" para seu valor, significa que não precisa necessariamente passar um valor, que o mesmo cairá no default. Quando os argumentos visto na docuemntação vierem sem o sinal de igual, significa que precisa obrigatoriamente passar o valor para ele.
 
 ## Instalação do Robot Framework
 
@@ -65,7 +77,6 @@ Instale o plugin: Robot Framework Language Server, que melhora a experiência ao
 
 
 **Observação:** Caso seja necessário interagir com navegadores, instale o WebDriver correspondente ao navegador utilizado.
-
 
 ## Escrevendo Casos de Teste
 
@@ -166,11 +177,20 @@ Variaveis no robot:
 
 Essas variaeis possuem keywords que podem ser chamadas e que tornaram as variaveis, como global, suíte, local e de casos de testes:
 
-
-
-
-
-
+- Set global variable: Essa keyword transformar uma variável em global.
+    
+    Ex: Set global variable      ${Variavel}
+    
+- Set suíte Variable: Essa keyword transformar a variável em suíte, ficando visível pra todo um suíte.
+    
+    Ex: Set suíte Variable:        ${Variavel}
+    
+- Set test Variable: Essa keyword deixa a variável visível somente pra esse teste.
+    
+    Ex: Set test Variable:          ${Variavel}
+    
+- Set Variable: Deixa a variável visível localmente.
+    Ex: ${Variavel} Set Variable     Valor
 
 5️⃣ Estruturando o Arquivo de Recurso de Teste
 
@@ -227,9 +247,25 @@ No arquivo de recursos também teremos a sessão "Settings", nela colocaremos a 
 No exemplo acima podemos observar que os **Passos** e **Verificações** de testes que foram implementadas no arquvivo de testes, estão sendo chamados na sessão Keywords, Cada passo e verificação vem colado na lateral, para identificação que se trata do titulo da nossas keywords. E as keywords vem abaixo com espaços duplos da lateral e espaços du0plos dos seus argumentos.
 
 ##   Comandos no Terminal
+Abaixo seguem alguns exemplo de comandos que podem ser utilizados no terminal.
 
-## Keywords
+- robot -i: Esse comando executa uma tag especifica
 
-Link para aa documentação das keywords
+Ex: robot -i menu amazon.com.br
+
+- robot -e: Ele exclui uma tag, ou seja, roda tudo menos aquela tag.
+
+Ex: robot -e menu amazon.com.br.
+
+- robot -d: ele executa o teste e joga os arquivos que são gerados, dentro desse arquivo especifico
+
+Ex: robot -d nome do arquivo e nome do arquivo de teste
+Obs: Sempre chamar o nome do arquivo, para ele joga o lixo que foi criado dentro dessa pasta.
+
+- robot -v: ele retira uma variavel global que foi colocada e adiciona a nova que foi declarada no terminal.
+
+- robot - t: Executa um titulo de caso de teste especifico.
+    
+  Ex: robot -t  “o titulo da keyword” amazon.com.br
 
 

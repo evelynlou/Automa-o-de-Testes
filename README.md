@@ -152,7 +152,6 @@ Casos de teste 01: Verificação da busca do site exemple.com
     Clicar no botão de "Faça sua busca"
     Digitar o nome "Telefone" no campo de pesquisa
     Verificar o resultado da pesquisa se esta listando o termo "Telefone"
-    Verificar se retorna o termo "Categorias"
 ```
 No robot ao iniciar uma sessão, sempre terá que ser utilizado o "***", no inicio e no final do titulo da sessão.
 

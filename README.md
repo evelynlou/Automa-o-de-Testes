@@ -221,7 +221,7 @@ Limpar o Campo de pesquisa
     Clear Element Text           locator=${INPUT}
     Sleep    1s
 
-Acessar a homepage do site da intelbras.com
+Acessar a homepage do site da exemple.com
     Go To    url=${URL}
     Wait Until Element Is Visible    locator=${VALOR}
  

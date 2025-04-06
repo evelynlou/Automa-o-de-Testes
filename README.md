@@ -16,25 +16,30 @@ Possui uma sintaxe baseada em dados tabulares, sendo fácil de usar. Além disso
 
 ## Keywords
 
-As keywords, são palavras chaves que realizam ações no teste e os conjuntos de keywords formam uma library.
+As keywords (palavras-chave) são comandos que realizam ações nos testes. Um conjunto de keywords forma uma biblioteca (library).
 
-As keywords vem juntamente com argumentos que são informações, que permitem que seja realizado uma ação.
+Cada keyword pode receber argumentos, que são informações necessárias para a execução da ação desejada.
 
-A keyword que será implementada vai variar de acordo com a library que está sendo utilizada. cada library possui suas proprias keywords. Mas há aquelas que funcionam para todas, idenpendete da library, se encontra no seguinte link: https://robotframework.org/robotframework/latest/libraries/BuiltIn.html
+A keyword que será utilizada varia de acordo com a biblioteca carregada. Cada biblioteca possui suas próprias keywords. Algumas keywords universais, válidas para qualquer biblioteca, estão disponíveis aqui:
+[Builtln Library](https://robotframework.org/robotframework/latest/libraries/BuiltIn.html)
 
-Um ponto importante a ser resaltado, é que durante a analise da documentação das keywords seus argumentos vierem com o sinal de "=" para seu valor, significa que não precisa necessariamente passar um valor, que o mesmo cairá no default. Quando os argumentos visto na docuemntação vierem sem o sinal de igual, significa que precisa obrigatoriamente passar o valor para ele.
+**Observações importantes:**
+
+- Quando um argumento aparece com o sinal de igual (=) na documentação, significa que ele possui um valor padrão (default). Nesse caso, o valor é opcional, pois se não for informado, será utilizado o valor padrão automaticamente.
+
+- Quando não há o sinal de igual, o argumento é obrigatório e precisa ser informado para que a keyword funcione corretamente.
 
 ## Instalação do Robot Framework
 
 1️⃣ Instalação do Python
 
-📌 Baixe o Python pelo link: [python.org/downloads](https://www.python.org/downloads)
+📌 Baixe o Python: https://www.python.org/downloads
 
-Instale a versão do Python compatível com seu sistema operacional.
+- Instale a versão do Python compatível com seu sistema operacional.
 
-Após a instalação, vá até as variáveis de ambiente do sistema e verifique se os diretórios do Python estão presentes no Path, para evitar problemas futuros.
+- Após a instalação, vá até as variáveis de ambiente do sistema e verifique se os diretórios do Python estão presentes no Path, para evitar problemas futuros.
 
-Para conferir se a instalação foi feita corretamente, execute o seguinte comando no terminal:
+Verifique a instalação:
 
 ```sh
   python --version
@@ -42,59 +47,63 @@ Para conferir se a instalação foi feita corretamente, execute o seguinte coman
 
 2️⃣ Instalação do Robot Framework
 
-📌 [robbotframework.org/](https://robotframework.org/)
+📌 Acesse: https://robotframework.org/
 
-Acesse a página, clique na aba Get Started e vá até a seção Install.
-
-Execute o seguinte comando para instalar o Robot Framework:
+Instale com o comando:
 
 ```sh
   pip install robotframework
 ```
 
-Para verificar a instalação, execute:
+Verifique a instalação:
 ```sh
   robot --version
 ```
 
 3️⃣ Instalação das Libraries
 
-Na página do Robot Framework, na aba Resources, há uma seção chamada Libraries, onde estão todas as bibliotecas disponíveis para uso.
+- Na aba Resources do site do Robot Framework, acesse a seção Libraries e escolha a biblioteca desejada.
 
-Ao escolher a biblioteca desejada, clique no nome da biblioteca, que irá redirecionar para a documentação oficial no GitHub, onde estará o comando para instalação.
+- Clique sobre a biblioteca escolhida para acessar sua documentação (geralmente no GitHub) e veja o comando de instalação correspondente.
 
 4️⃣ Instalação do VS Code e Plugin
 
-📌 Baixe o VS Code pelo link:  [Vscode.downloads](https://code.visualstudio.com/)
+📌 Baixe o VS Code: https://code.visualstudio.com/
 
-Instale a versão do VS Code compatível com seu sistema operacional.
+**Instale o plugin:**
 
-Instale o plugin: Robot Framework Language Server, que melhora a experiência ao escrever e editar arquivos de teste do Robot Framework.
+- Robot Framework Language Server
 
-5️⃣ Instalação da Extensão para pegar o locator de componentes:
-
-📌 Baixe a extensão pelo link:  [Extensão.downloads](https://chromewebstore.google.com/detail/selectorshub-xpath-helper/ndgimibanhlabgdgjcpbbndiehljcpfh?hl=pt-BR))
+Esse plugin facilita a escrita e edição dos arquivos .robot.
 
 
-**Observação:** Caso seja necessário interagir com navegadores, instale o WebDriver correspondente ao navegador utilizado.
+5️⃣ Extensão para Captura de Locators
+
+📌  Instale a extensão: [SelectorsHub](https://chromewebstore.google.com/detail/selectorshub-xpath-helper/ndgimibanhlabgdgjcpbbndiehljcpfh?hl=pt-BR)
+
+Essa ferramenta ajuda a identificar e copiar locators de elementos na tela.
+
+**Observações importantes:**
+
+Para testes com navegador, instale o WebDriver correspondente ao navegador utilizado.
 
 ## Escrevendo Casos de Teste
 
 1️⃣ Criando um Projeto
 
-No VS Code, crie uma nova pasta para armazenar os testes.
+- Crie uma nova pasta no VS Code para armazenar os testes.
 
-Dentro da pasta, crie um arquivo com a extensão ".robot" para armazenar os casos de teste.
+- Dentro da pasta, crie arquivos com a extensão .robot.
 
-Normalmente, é utilizado um arquivo separado para os recursos e outro para os testes.
+É comum separar os arquivos de recursos dos arquivos de testes.
 
-2️⃣ Escolhendo o Método de Escrita dos Testes
+2️⃣ Métodos de Escrita dos Testes
 
-O Robot Framework permite escrever casos de teste usando dois principais métodos:
+- O Robot Framework permite escrever casos de teste usando dois principais métodos:
 
-Procedural
+✅ Procedural
 
-Segue um formato menos formal para descrever cenários de testes.
+Formato direto, menos formal:
 
 Exemplo:
 
@@ -106,19 +115,19 @@ Exemplo:
     Verificar o resultado da pesquisa se esta listando o termo "Telefone"
 ```
 
-Gherkin BDD
+✅ Gherkin (BDD)
 
 Baseado nas regras de negócio e usa palavras-chave como:
 
-1️⃣ Given (Dado) → Define o estado inicial
+- Given (Dado) → Define o estado inicial
 
-2️⃣ When (Quando) → Descreve a ação realizada
+- When (Quando) → Descreve a ação realizada
 
-3️⃣ Then (Então) → Indica o resultado esperado
+- Then (Então) → Indica o resultado esperado
 
-4️⃣ And (E) → Conecta múltiplas condições
+- And (E) → Conecta múltiplas condições
 
-5️⃣ But (Mas) → Expressa exceções
+- But (Mas) → Expressa exceções
 
 Exemplo: 
 
@@ -130,11 +139,9 @@ Exemplo:
     Então o sistema exibe os resultados contendo "Telefone"  
 
 ```
-Ambos os métodos têm formatos diferentes, mas seguem a mesma lógica para a execução dos testes.
+Ambos os formatos seguem a mesma lógica de execução no Robot Framework.
 
-3️⃣ Estruturando o Arquivo de Teste
-
-No arquivo de teste .robot, a estrutura é a seguinte:
+3️⃣ Estrutura do Arquivo de Teste
 
 ```sh
 *** Settings ***
@@ -153,47 +160,42 @@ Casos de teste 01: Verificação da busca do site exemple.com
     Digitar o nome "Telefone" no campo de pesquisa
     Verificar o resultado da pesquisa se esta listando o termo "Telefone"
 ```
-No robot ao iniciar uma sessão, sempre terá que ser utilizado o "***", no inicio e no final do titulo da sessão.
+**Informações úteis:**
 
-Na estrutura acima, podemos observar a sessão chamada "Settings", tal sessão é utilizada para a configuração do arquivo de testes, onde será chamado arquivo de recursos do nosso teste e também pode ser utilizada para a implementação do Setup(Ação antes do suíte ou  dos casos de teste) e Teardow(Ação depois do suíte ou dos casos de teste).
+- Sessões devem começar com *** e conter o nome da sessão entre asteriscos.
 
-No Robot Framework, podemos adicionar informações adicionais aos testes:
+- Settings: configurações do seu arquivo de teste. Nessa seção, também é possível definir o Setup (ações executadas antes dos testes) e o Teardown (ações executadas após os testes).
 
-Documentation: Para descrever o caso de teste ou o suíte.
+- Documentation: descrição do teste.
 
-Tags: Para categorizar os testes e permitir execução seletiva.
+- Tags: categorização para facilitar filtros.
 
-4️⃣ Variaveis
-
-Antes de ir para estrutura do arquivo de recurso, é importante mencionar sobre as variaveis dentro do robot.
+4️⃣ Variaveis no Robot Framework
 
 Variaveis no robot:
 
-- Variavel Global: Variavel que funciona para todos os arquivos de testes, presente no diretório
-- Variavel Suíte: Variavel que pode ser utilizada apenas no arquivo de teste que está sendo chamada, não funcionando para demais arquivos.
-- Variavel Local: variavel que funciona somente na keyword, em que está sendo chamada
-- Variavel de Caso de Teste: variavel poderá ser utilizada apenas no "Caso de teste", onde está sendo chamada.
+- Global: visível em todos os arquivos.
 
-Essas variaeis possuem keywords que podem ser chamadas e que tornaram as variaveis, como global, suíte, local e de casos de testes:
+- Suite: visível apenas dentro da suíte.
 
-- Set global variable: Essa keyword transformar uma variável em global.
-    
-    Ex: Set global variable      ${Variavel}
-    
-- Set suíte Variable: Essa keyword transformar a variável em suíte, ficando visível pra todo um suíte.
-    
-    Ex: Set suíte Variable:        ${Variavel}
-    
-- Set test Variable: Essa keyword deixa a variável visível somente pra esse teste.
-    
-    Ex: Set test Variable:          ${Variavel}
-    
-- Set Variable: Deixa a variável visível localmente.
-    Ex: ${Variavel} Set Variable     Valor
+- Teste: visível dentro do caso de teste.
 
-5️⃣ Estruturando o Arquivo de Recurso de Teste
+- Local: visível apenas dentro da keyword.
 
-No arquivo de Recurso de teste, a estrutura é a seguinte:
+**Informações úteis:**
+
+- Existem keywords que permitem definir o escopo de uma variável dentro do Robot Framework. Com elas, é possível transformar uma variável em global, de suíte, de teste ou local:
+```sh
+Set Global Variable     ${variavel}
+Set Suite Variable      ${variavel}
+Set Test Variable       ${variavel}
+${variavel}   Set Variable    valor
+```
+- As variáveis declaradas na seção *** Variables *** de um arquivo de recurso (.resource) são consideradas globais, podendo ser acessadas por qualquer teste que importe esse recurso.
+
+- Já as variáveis declaradas diretamente na seção *** Variables *** de um arquivo de teste (.robot) têm escopo de suíte, ou seja, só são visíveis dentro daquele arquivo.
+
+5️⃣ Estrutura do Arquivo de Recursos
 
 ```sh
 *** Settings ***
@@ -241,30 +243,27 @@ Verificar o resultado da pesquisa se esta listando o termo "Telefone"
 
 ```
 
-No arquivo de recursos também teremos a sessão "Settings", nela colocaremos a library que será utilziada na automação.
+**Informações úteis:**
 
-No exemplo acima podemos observar que os **Passos** e **Verificações** de testes que foram implementadas no arquvivo de testes, estão sendo chamados na sessão Keywords, Cada passo e verificação vem colado na lateral, para identificação que se trata do titulo da nossas keywords. E as keywords vem abaixo com espaços duplos da lateral e espaços du0plos dos seus argumentos.
+- Em *** Settings ***, declaramos as libraries que serão usadas na automação.
+
+- Em *** Variables ***, definimos valores reutilizáveis.
+
+- Em *** Keywords ***, criamos blocos de ações.
+
 
 ##   Comandos no Terminal
-Abaixo seguem alguns exemplo de comandos que podem ser utilizados no terminal.
 
-- robot -i: Esse comando executa uma tag especifica
+| Comando      | Descrição                                             | Exemplo                                                                 |
+|--------------|-------------------------------------------------------|-------------------------------------------------------------------------|
+| `robot -i`   | Executa testes com uma tag específica                 | `robot -i busca_tests`                                                  |
+| `robot -e`   | Exclui uma tag específica (executa todas menos essa)  | `robot -e menu`                                                         |
+| `robot -d`   | Gera relatórios em uma pasta específica               | `robot -d resultados`                                                   |
+| `robot -v`   | Substitui o valor de uma variável global              | `robot -v BROWSER:chrome`                                               |
+| `robot -t`   | Executa um caso de teste específico                   | `robot -t "Caso de Teste 01: Verificação da busca do site exemple.com"` |
 
-Ex: robot -i menu amazon.com.br
+**Dica:**
 
-- robot -e: Ele exclui uma tag, ou seja, roda tudo menos aquela tag.
-
-Ex: robot -e menu amazon.com.br.
-
-- robot -d: ele executa o teste e joga os arquivos que são gerados, dentro desse arquivo especifico
-
-Ex: robot -d nome do arquivo e nome do arquivo de teste
-Obs: Sempre chamar o nome do arquivo, para ele joga o lixo que foi criado dentro dessa pasta.
-
-- robot -v: ele retira uma variavel global que foi colocada e adiciona a nova que foi declarada no terminal.
-
-- robot - t: Executa um titulo de caso de teste especifico.
-    
-  Ex: robot -t  “o titulo da keyword” amazon.com.br
-
+- Sempre utilize o parametro -d para definir uma pasta de destino onde serão salvos os arquivos gerados (log.html, report.html, output.xml..).
+- Sempre que for executar um teste, comece o comando com "robot", seguido dos parâmetros desejados e por fim, o caminho do arquivo de teste ou da pasta.
 
